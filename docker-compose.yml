@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  postgres:
+    container_name: play_power_quizzer
+    image: postgres
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      PGDATA: /var/lib/postgresql/data
+      POSTGRES_DB: quizzer
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - spring-boot-network
+    restart: unless-stopped
+
+  redis:
+    image: redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    ports:
+      - '6379:6379'
+    volumes:
+      - 'redis_data:/data/redis'
+    networks:
+      - spring-boot-network
+
+  spring-app:
+    image: priyank9413/quizzer-latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - spring-boot-network
+    restart: unless-stopped
+
+
+networks:
+  spring-boot-network:
+    driver: bridge
+
+volumes:
+  postgres:
+    driver: local
+  redis_data:
+    driver: local

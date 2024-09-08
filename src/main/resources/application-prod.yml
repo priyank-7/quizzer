@@ -1,0 +1,42 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/quizzer # change to localhost if running locally
+    username: username
+    password: password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  cache:
+    redis:
+      time-to-live: 600s
+
+
+  ai:
+    openai:
+      api-key: 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
+      base-url: https://api.groq.com/openai
+      chat:
+        options:
+          model: llama3-70b-8192
+          temperature: 0.5
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: pptmp1600@gmail.com
+    password: slni obdh woit qdaz
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
