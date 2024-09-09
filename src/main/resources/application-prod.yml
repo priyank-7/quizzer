@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: postgresql://meticulous-empathy.railway.internal:5432/railway
+    url: jdbc:postgresql://meticulous-empathy.railway.internal:5432/railway
     username: postgres
     password: SEPXgLzZDwDPqEtDNAcihsaVjIcfHJOt
     driver-class-name: org.postgresql.Driver
